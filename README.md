@@ -1,35 +1,22 @@
-# Data-Engineer-Docker-Airflow
-### Entorno Virtual
-python -m venv venv
-source venv/Scripts/activate  
+# Data-Engineer-ProyectoFinal
+********************************
+
+### Uso
+Tuve que usar codespace porque no me dejaba instalar Docker por problemas con mi Windows y en Ubuntu pasa el problema de RAM que cuento mas abajo
 
 ********************************
 
-### Requirements
-pip install -r dependencies/requirements.txt  
-python.exe -m pip install --upgrade pip
+### Creacion del TaskFile
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+Crea carpeta Bin con el archivo task.exec
 
 ********************************
 
-### Mover a carpeta de Directorio en Ubuntu
-cd /mnt/d/Fede\ Ort/a.\ Portafolio/Coderhouse\ -\ Data\ Engineer/Docker-Airflow  
-
-********************************
-
-### Definición de variables Airflow
-export AIRFLOW_VERSION=2.10.0  
-export PYTHON_VERSION="$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"  
-export CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"  
-
-********************************
-
-### Instalación de Airflow  
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"  
-
-********************************
-
-### Correr Airflow
-airflow standalone
+### Corrida del TaskFile
+1 --> ./bin/task pre_project
+2 --> ./bin/task start_project
+3 --> ./bin/task down_project
+4 --> ./bin/task cleanup
 
 ********************************
 
@@ -56,51 +43,10 @@ sudo usermod -aG docker $USER
 
 ********************************
 
-### Correr Docker
-docker-compose up
-
-docker-compose up -d  
-
-docker ps  
-
-docker-compose logs airflow-webserver
-
-docker-compose down  
-
-docker-compose run --rm airflow-webserver airflow db init  
-
-********************************
-
-### Error Airflow
---> airflow.api.auth.backend.basic is not found
-
-********************************
-
-### Docker File
-docker build -t my-airflow-image .
-
-********************************
-
-### Creando carpetas y descargando YML
-curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.9.2/docker-compose.yaml'
-
-mkdir -p ./docker_airflow/{logs,dags,config,plugins}
-
-echo -e "AIRFLOW_UID=$(id -u)" > ./.env
-
-### Comenzamos el Proyecto
-docker compose up airflow-init -d
-
-docker compose up -d
-
-docker build -t my-airflow-image .
+### Detener el Contenedor Docker
+docker compose -f ./etl/docker-compose.yaml down  
 
 ********************************
 
 ### Error con la RAM
 Uso Ubuntu para correr Linux y no se porque cuando abro Ubuntu, entro al administrador de Tareas y automaticamente, el procentaje de uso de mi RAM pasa a 95%, logre correr bastantes cosas pero ya ahora se hizo imposible, en 10 minutos tuve que reiniciar 3 veces porque se me trababa la computadora, de todas formas creo que logre que funcione.
-
-********************************
-
-### Detener el Contenedor Docker
-docker compose -f ./etl/docker-compose.yaml down  
