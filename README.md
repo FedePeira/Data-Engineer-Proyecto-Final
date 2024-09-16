@@ -99,3 +99,8 @@ docker build -t my-airflow-image .
 
 ### Error con la RAM
 Uso Ubuntu para correr Linux y no se porque cuando abro Ubuntu, entro al administrador de Tareas y automaticamente, el procentaje de uso de mi RAM pasa a 95%, logre correr bastantes cosas pero ya ahora se hizo imposible, en 10 minutos tuve que reiniciar 3 veces porque se me trababa la computadora, de todas formas creo que logre que funcione.
+
+********************************
+
+### Detener el Contenedor Docker
+docker compose -f ./etl/docker-compose.yaml down  
