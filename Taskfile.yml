@@ -9,28 +9,28 @@ env:
 tasks:
   pre_project:
     cmds:
-      - echo "CREATE THE AIRLFOW AND THE STORAGE DIRS"
-      - echo -e "AIRFLOW_UID=$(id -u)" > $ROOT_PROJECT/.env
-      - |
-        cat <<EOF >> $ROOT_PROJECT/.env
-        REDSHIFT_URL=
-        REDSHIFT_USER=
-        REDSHIFT_PWD=
-        REDSHIFT_PORT=
-        REDSHIFT_DB=
-        REDSHIFT_SCHEMA=
-        EMAIL=
-        EMAIL_PASSWORD=
-        SMTP_HOST=
-        SMTP_STARTTLS=
-        SMTP_SSL=
-        SMTP_USER=
-        SMTP_PASSWORD=
-        SMTP_PORT=
-        SMTP_MAIL_FROM=
-        EOF
-      - mkdir -p $ROOT_PROJECT/{raw_data,processed_data,dags,logs,plugins,config}
-      - tree -L 2 $ROOT_PROJECT
+      - echo "CREATE THE AIRLFOW AND THE STORAGE DIRS"  
+      - echo "AIRFLOW_UID=$(id -u)" > $ROOT_PROJECT/.env  
+      - |  
+        {  
+          echo "REDSHIFT_URL="  
+          echo "REDSHIFT_USER="  
+          echo "REDSHIFT_PWD="  
+          echo "REDSHIFT_PORT="  
+          echo "REDSHIFT_DB="  
+          echo "REDSHIFT_SCHEMA="  
+          echo "EMAIL="  
+          echo "EMAIL_PASSWORD="  
+          echo "SMTP_HOST="  
+          echo "SMTP_STARTTLS="  
+          echo "SMTP_SSL="  
+          echo "SMTP_USER="  
+          echo "SMTP_PASSWORD="  
+          echo "SMTP_PORT="  
+          echo "SMTP_MAIL_FROM="  
+        } >> $ROOT_PROJECT/.env  
+      - mkdir -p $ROOT_PROJECT/{raw_data,processed_data,dags,logs,plugins,config}  
+      - tree -L 2 $ROOT_PROJECT 
 
   start_project:
       - docker compose -f $ROOT_PROJECT/$DOCKER up airflow-init --build
